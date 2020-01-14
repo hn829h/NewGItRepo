@@ -3,16 +3,14 @@ resource "azurerm_lb" "main" {
   resource_group_name = "${azurerm_resource_group.main.name}"
   location            = "${var.location}"
   
-
-        
+     
 
   frontend_ip_configuration {
     name                          = "${var.frontend_name}"
     public_ip_address_id          = "${var.type == "public" ? join("",azurerm_public_ip.main.*.id) : ""}"
     private_ip_address            = ""
     private_ip_address_allocation = "Dynamic"
-    subnet_id                     = "${azurerm_subnet.main.id}"
-  }
+    }
 }
 
 resource "azurerm_lb_backend_address_pool" "main" {

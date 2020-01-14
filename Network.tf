@@ -57,11 +57,10 @@ resource "azurerm_network_interface" "main" {
   resource_group_name       = azurerm_resource_group.main.name
   network_security_group_id = azurerm_network_security_group.main.id
 
-
-  ip_configuration {
+ip_configuration {
     name                          = "configuration-${count.index}"
-    subnet_id                     = azurerm_subnet.main.id
-    private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = element(azurerm_public_ip.main.*.id, count.index)
-  }
+    private_ip_address            = ""
+    private_ip_address_allocation = "Dynamic"
+    subnet_id                     = "${azurerm_subnet.main.id}"
+}
 }
